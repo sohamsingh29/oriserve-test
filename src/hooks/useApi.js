@@ -56,6 +56,7 @@ const useApi = () => {
         format: "json",
       },
     });
+    sethasMore(data.photos.photo.length > 0);
     setPhotoList([...data.photos.photo]);
 
     setLoading(false);

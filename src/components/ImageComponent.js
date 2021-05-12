@@ -20,11 +20,12 @@ const ImageComponent = React.forwardRef(
     return (
       <>
         <Box
+          cursor="pointer"
           rounded="md"
           onClick={onOpen}
           borderWidth="thin"
           borderColor="blackAlpha.600"
-          p="4"
+          p="1"
         >
           <AspectRatio ratio={1}>
             <Image

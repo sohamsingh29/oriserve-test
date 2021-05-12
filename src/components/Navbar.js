@@ -58,7 +58,7 @@ const Navbar = ({ handler }) => {
               colorScheme="whiteAlpha"
               variant="filled"
               onClick={setToggle.on}
-              // color="white"
+              _focusWithin={{ color: "white" }}
               size="lg"
               placeholder="search here..."
             />
@@ -66,13 +66,22 @@ const Navbar = ({ handler }) => {
               <Box
                 ref={inputRef}
                 pos="absolute"
-                top="lg"
+                top="14"
+                shadow="lg"
+                rounded="sm"
                 bg="white"
                 color="black"
                 w="full"
               >
                 {suggestions.map((item) => (
-                  <Text onClick={handleClick} p="4">
+                  <Text
+                    cursor="pointer"
+                    _hover={{
+                      background: "#0003",
+                    }}
+                    onClick={handleClick}
+                    p="4"
+                  >
                     {item}
                   </Text>
                 ))}
