@@ -17,18 +17,19 @@ const Navbar = ({ handler }) => {
   });
 
   const handleSearch = (e) => {
+    // onsubmit function for search
     e.preventDefault();
 
     const query = e.target[0].value;
     setToggle.off();
 
-    setSuggestions([...suggestions, query]);
+    setSuggestions([...suggestions, query]); // suggestions logic to save in localstorage
     localStorage.setItem(
       "suggestions",
       JSON.stringify([...suggestions, query])
     );
 
-    handler(e.target[0].value);
+    handler(e.target[0].value); // useApi handlesearch function call
   };
 
   const handleClick = (e) => {

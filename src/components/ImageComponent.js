@@ -28,6 +28,7 @@ const ImageComponent = React.forwardRef(
           p="1"
         >
           <AspectRatio ratio={1}>
+            {/*aspect ratio component for images to give them all same ratios */}
             <Image
               alt={title}
               ref={ref}

@@ -5,16 +5,17 @@ const GET_RECENTS = `https://www.flickr.com/services/rest/?method=flickr.photos.
 
 const GET_SEARCH =
   "https://www.flickr.com/services/rest/?method=flickr.photos.search&safe_search=safe&per_page=60&format=json&nojsoncallback=1";
-
+// api logic of the app
 const useApi = () => {
   const [photoList, setPhotoList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const [query, setQuery] = useState("");
-  const [uri, setUri] = useState(GET_RECENTS);
-  const [hasMore, sethasMore] = useState(true);
+  const [page, setPage] = useState(1); // current page number of api
+  const [query, setQuery] = useState(""); // user search query
+  const [uri, setUri] = useState(GET_RECENTS); // api base uri
+  const [hasMore, setHasMore] = useState(true); // if api has more photos
 
   useEffect(() => {
+    // useEffect for getting data on page number change and adding to list
     const fetchData = async () => {
       setLoading(true);
 
@@ -28,7 +29,7 @@ const useApi = () => {
         },
       });
 
-      sethasMore(data.photos.photo.length > 0);
+      setHasMore(data.photos.photo.length > 0);
       setPhotoList((prevPhotoList) => [...prevPhotoList, ...data.photos.photo]);
 
       setLoading(false);
@@ -38,7 +39,7 @@ const useApi = () => {
   }, [page]);
 
   const handleSearch = async (enquiry) => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0); // scroll to top on search
 
     setPhotoList([]);
     setLoading(true);
@@ -56,7 +57,7 @@ const useApi = () => {
         format: "json",
       },
     });
-    sethasMore(data.photos.photo.length > 0);
+    setHasMore(data.photos.photo.length > 0);
     setPhotoList([...data.photos.photo]);
 
     setLoading(false);

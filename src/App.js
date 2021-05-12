@@ -16,6 +16,7 @@ function App() {
 
   const observer = useRef();
   const lastBookElementRef = useCallback(
+    // ref creation with intersection Observer api to increase page when last  component in view
     (node) => {
       if (loading) return;
       if (observer.current) observer.current.disconnect();
@@ -40,7 +41,7 @@ function App() {
               <ImageComponent
                 key={nanoid()}
                 {...photo}
-                ref={lastBookElementRef}
+                ref={lastBookElementRef /* set ref for last element */}
               />
             ) : (
               <ImageComponent key={nanoid()} {...photo} />
