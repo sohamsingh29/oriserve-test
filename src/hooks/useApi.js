@@ -36,7 +36,7 @@ const useApi = () => {
     };
 
     fetchData();
-  }, [page]);
+  }, [page, query, uri]);
 
   const handleSearch = async (enquiry) => {
     window.scrollTo(0, 0); // scroll to top on search

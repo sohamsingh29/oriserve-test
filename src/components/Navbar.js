@@ -2,6 +2,7 @@ import { Button } from "@chakra-ui/button";
 import { useBoolean, useOutsideClick } from "@chakra-ui/hooks";
 import { Input } from "@chakra-ui/input";
 import { Box, Center, Flex, Heading, Text } from "@chakra-ui/layout";
+import { nanoid } from "nanoid";
 import { useEffect, useRef, useState } from "react";
 
 const Navbar = ({ handler }) => {
@@ -76,6 +77,7 @@ const Navbar = ({ handler }) => {
               >
                 {suggestions.map((item) => (
                   <Text
+                    key={nanoid()}
                     cursor="pointer"
                     _hover={{
                       background: "#0003",
