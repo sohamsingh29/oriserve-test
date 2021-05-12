@@ -6,6 +6,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ![screenshot](./flickrsearch.png)
 
+## hosted url [http://flickr-search-chi.vercel.app/](http://flickr-search-chi.vercel.app/)
+
 ## Available Scripts
 
 In the project directory, you can run:
