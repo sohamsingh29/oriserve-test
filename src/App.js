@@ -3,6 +3,7 @@ import {
   CircularProgress,
   Flex,
   SimpleGrid,
+  Text,
 } from "@chakra-ui/react";
 import { useCallback, useRef } from "react";
 import ImageComponent from "./components/ImageComponent";
@@ -11,7 +12,7 @@ import useApi from "./hooks/useApi";
 import { nanoid } from "nanoid";
 
 function App() {
-  const { photoList, loading, setPage, handleSearch } = useApi();
+  const { hasMore, photoList, loading, setPage, handleSearch } = useApi();
 
   const observer = useRef();
   const lastBookElementRef = useCallback(
@@ -20,7 +21,7 @@ function App() {
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
         console.log(entries);
-        if (entries[0].isIntersecting) {
+        if (entries[0].isIntersecting && hasMore) {
           setPage((prevPage) => prevPage + 1);
         }
       });
@@ -47,6 +48,7 @@ function App() {
           )}
         </SimpleGrid>
         {loading && <CircularProgress isIndeterminate color="green.300" />}
+        {!hasMore && <Text>No more photos</Text>}
       </Flex>
     </ChakraProvider>
   );

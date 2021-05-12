@@ -10,6 +10,7 @@ import {
   ModalOverlay,
 } from "@chakra-ui/modal";
 import { useDisclosure } from "@chakra-ui/hooks";
+import { CircularProgress } from "@chakra-ui/progress";
 
 const ImageComponent = React.forwardRef(
   ({ id, secret, server, title }, ref) => {
@@ -26,15 +27,16 @@ const ImageComponent = React.forwardRef(
           p="4"
         >
           <AspectRatio ratio={1}>
-            <img
+            <Image
               alt={title}
               ref={ref}
               src={src}
+              fallback={<CircularProgress isIndeterminate color="green.300" />}
               style={{ objectFit: "cover" }}
             />
           </AspectRatio>
         </Box>
-        <Modal isOpen={isOpen} onClose={onClose}>
+        <Modal isCentered isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>

@@ -8,20 +8,26 @@ const Navbar = ({ handler }) => {
   const [suggestions, setSuggestions] = useState([]);
   const inputRef = useRef(null);
   const [toggle, setToggle] = useBoolean(false);
+
   useOutsideClick({
     handler() {
       setToggle.off();
     },
     ref: inputRef,
   });
+
   const handleSearch = (e) => {
     e.preventDefault();
+
     const query = e.target[0].value;
+    setToggle.off();
+
     setSuggestions([...suggestions, query]);
     localStorage.setItem(
       "suggestions",
       JSON.stringify([...suggestions, query])
     );
+
     handler(e.target[0].value);
   };
 
@@ -52,7 +58,7 @@ const Navbar = ({ handler }) => {
               colorScheme="whiteAlpha"
               variant="filled"
               onClick={setToggle.on}
-              color="white"
+              // color="white"
               size="lg"
               placeholder="search here..."
             />
@@ -73,7 +79,7 @@ const Navbar = ({ handler }) => {
                 {suggestions.length > 0 && (
                   <Button
                     colorScheme="red"
-                    alignSelf="end"
+                    float="right"
                     onClick={() => {
                       localStorage.clear();
                       setToggle.off();
