@@ -42,25 +42,10 @@ const useApi = () => {
     window.scrollTo(0, 0); // scroll to top on search
 
     setPhotoList([]);
-    setLoading(true);
 
     setUri(GET_SEARCH);
     setQuery(enquiry);
     setPage(1);
-
-    let { data } = await axios.get(GET_SEARCH, {
-      params: {
-        api_key: process.env.REACT_APP_FLICKR_KEY,
-        page: "1",
-        text: enquiry,
-        per_page: "60",
-        format: "json",
-      },
-    });
-    setHasMore(data.photos.photo.length > 0);
-    setPhotoList([...data.photos.photo]);
-
-    setLoading(false);
   };
 
   return { hasMore, photoList, loading, setPage, handleSearch };
