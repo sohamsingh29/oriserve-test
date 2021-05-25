@@ -16,10 +16,11 @@ const useApi = () => {
 
   useEffect(() => {
     // useEffect for getting data on page number change and adding to list
+    let cancel;
     const fetchData = async () => {
       setLoading(true);
-
       let { data } = await axios.get(uri, {
+        cancelToken: new axios.CancelToken((c) => (cancel = c)),
         params: {
           api_key: process.env.REACT_APP_FLICKR_KEY,
           page,
@@ -28,7 +29,7 @@ const useApi = () => {
           format: "json",
         },
       });
-
+      cancel();
       setHasMore(data.photos.photo.length > 0);
       setPhotoList((prevPhotoList) => [...prevPhotoList, ...data.photos.photo]);
 
@@ -36,14 +37,19 @@ const useApi = () => {
     };
 
     fetchData();
+    return () => cancel();
   }, [page, query, uri]);
 
   const handleSearch = async (enquiry) => {
+    console.log(enquiry);
     window.scrollTo(0, 0); // scroll to top on search
-
+    if (enquiry.length == 0) {
+      setUri(GET_RECENTS);
+    } else {
+      setUri(GET_SEARCH);
+    }
     setPhotoList([]);
 
-    setUri(GET_SEARCH);
     setQuery(enquiry);
     setPage(1);
   };

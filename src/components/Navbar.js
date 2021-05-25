@@ -37,6 +37,10 @@ const Navbar = ({ handler }) => {
     setToggle.off();
     handler(e.target.innerText);
   };
+  const handleChange = (e) => {
+    e.preventDefault();
+    handler(e.target.value);
+  };
 
   useEffect(() => {
     const value = JSON.parse(localStorage.getItem("suggestions"));
@@ -62,6 +66,7 @@ const Navbar = ({ handler }) => {
               onClick={setToggle.on}
               _focusWithin={{ color: "white" }}
               size="lg"
+              onChange={handleChange}
               placeholder="search here..."
             />
             {toggle && (
