@@ -1,15 +1,10 @@
-import {
-  ChakraProvider,
-  CircularProgress,
-  Flex,
-  SimpleGrid,
-  Text,
-} from "@chakra-ui/react";
+import { ChakraProvider, CircularProgress, Text } from "@chakra-ui/react";
 import { useCallback, useRef } from "react";
 import ImageComponent from "./components/ImageComponent";
 import Navbar from "./components/Navbar";
 import useApi from "./hooks/useApi";
 import { nanoid } from "nanoid";
+import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
 function App() {
   const { hasMore, photoList, loading, setPage, handleSearch } = useApi();
@@ -33,8 +28,10 @@ function App() {
   return (
     <ChakraProvider>
       <Navbar handler={handleSearch} />
-      <Flex w="full" flexDirection="column" alignItems="center">
-        <SimpleGrid columns={[2, 3, 4, 6]} w={4 / 5} my="4" spacing="10">
+      <ResponsiveMasonry
+        columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3, 1200: 4, 1500: 5 }}
+      >
+        <Masonry>
           {photoList.map((photo, index) =>
             photoList.length === index + 1 ? (
               <ImageComponent
@@ -46,10 +43,11 @@ function App() {
               <ImageComponent key={nanoid()} {...photo} />
             )
           )}
-        </SimpleGrid>
-        {loading && <CircularProgress isIndeterminate color="green.300" />}
-        {!hasMore && <Text>No more photos</Text>}
-      </Flex>
+        </Masonry>
+      </ResponsiveMasonry>
+
+      {loading && <CircularProgress isIndeterminate color="green.300" />}
+      {!hasMore && <Text>No more photos</Text>}
     </ChakraProvider>
   );
 }

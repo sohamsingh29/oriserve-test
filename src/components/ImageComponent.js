@@ -1,6 +1,6 @@
 import { Image } from "@chakra-ui/image";
 import React from "react";
-import { AspectRatio, Box, Text } from "@chakra-ui/layout";
+import { Box, Text } from "@chakra-ui/layout";
 import {
   Modal,
   ModalBody,
@@ -19,24 +19,15 @@ const ImageComponent = React.forwardRef(
 
     return (
       <>
-        <Box
-          cursor="pointer"
-          rounded="md"
-          onClick={onOpen}
-          borderWidth="thin"
-          borderColor="blackAlpha.600"
-          p="1"
-        >
-          <AspectRatio ratio={1}>
-            {/*aspect ratio component for images to give them all same ratios */}
-            <img
-              alt={title}
-              ref={ref}
-              src={src}
-              fallback={<CircularProgress isIndeterminate color="green.300" />}
-              style={{ objectFit: "cover" }}
-            />
-          </AspectRatio>
+        <Box cursor="pointer" onClick={onOpen} p="1" width="full">
+          {/*aspect ratio component for images to give them all same ratios */}
+          <img
+            alt={title}
+            ref={ref}
+            src={src}
+            fallback={<CircularProgress isIndeterminate color="green.300" />}
+            style={{ width: "100%" }}
+          />
         </Box>
         <Modal isCentered isOpen={isOpen} onClose={onClose}>
           <ModalOverlay />

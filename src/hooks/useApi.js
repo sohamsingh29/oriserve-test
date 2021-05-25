@@ -24,7 +24,7 @@ const useApi = () => {
           api_key: process.env.REACT_APP_FLICKR_KEY,
           page,
           text: query,
-          per_page: "60",
+          per_page: "20",
           format: "json",
         },
       });
