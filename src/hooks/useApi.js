@@ -43,7 +43,7 @@ const useApi = () => {
   const handleSearch = async (enquiry) => {
     console.log(enquiry);
     window.scrollTo(0, 0); // scroll to top on search
-    if (enquiry.length == 0) {
+    if (enquiry.length === 0) {
       setUri(GET_RECENTS);
     } else {
       setUri(GET_SEARCH);
